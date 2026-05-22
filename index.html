@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Rizka ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- AUDIO -->
+<audio id="bgMusic" preload="auto" loop>
+  <source src="lagu2.mp3" type="audio/mpeg">
+</audio>
+<audio id="sfxBlow" preload="auto">
+  <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqPk5eZmZmYl5STkIyIhH96dG5oY15ZVFFPTk5PUFJVWFxgZGlucHN2eHp7fH19fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLS0pJSEhHR0ZGRUVFRUUFBQYFB" type="audio/wav">
+</audio>
+
+<!-- CANVAS para partikel -->
+<canvas id="canvas"></canvas>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- ======== INTRO SCREEN ======== -->
+<div class="screen" id="screenIntro">
+  <div class="stars-bg" id="starsBg"></div>
+  <div class="intro-glow"></div>
+  <div class="intro-content">
+    <div class="intro-sparkle">✦ ✦ ✦</div>
+    <h1 class="intro-name">Rizka</h1>
+    <p class="intro-sub">Ada sebuah kejutan untukmu malam ini</p>
+    <button class="btn-enter" id="btnEnter">
+      <span class="btn-text">Buka Kejutan</span>
+      <span class="btn-heart">♡</span>
+    </button>
+  </div>
+  <div class="floating-hearts" id="floatingHearts"></div>
+</div>
+
+<!-- ======== HERO SCREEN ======== -->
+<div class="screen hidden" id="screenHero">
+  <div class="hero-particles" id="heroParticles"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <span class="hero-tag">✦ Happy Birthday ✦</span>
+    <h1 class="hero-title">Selamat<br><em>Ulang Tahun</em></h1>
+    <p class="hero-name">Rizka Isnaini Meilani</p>
+    <p class="hero-quote" id="heroTyping"></p>
+    <div class="hero-divider">
+      <span></span><i>♡</i><span></span>
+    </div>
+    <button class="btn-next" id="btnToCandle">
+      Lihat Hadiahmu
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ======== CANDLE SCREEN ======== -->
+<div class="screen hidden" id="screenCandle">
+  <div class="candle-bg"></div>
+  <div class="candle-content">
+    <div class="candle-instruction" id="candleInstruction">
+      <p class="ci-label">✦ Tiup satu per satu ✦</p>
+      <h2>Klik 5 Lilin untuk<br>membuka pesanku</h2>
+      <p class="ci-sub">Setiap lilin menyimpan sebuah kata hati</p>
+      <div class="candle-counter">
+        <span id="candleCount">0</span>/5 lilin ditiup
+      </div>
+    </div>
+
+    <!-- CAKE -->
+    <div class="cake-wrapper" id="cakeWrapper">
+      <div class="cake">
+        <!-- LAYER TOP -->
+        <div class="cake-tier tier-top">
+          <div class="cake-face tier-top-face">
+            <div class="cake-deco">
+              <span>♡</span><span>✦</span><span>♡</span>
+            </div>
+          </div>
+          <div class="cake-top-plate"></div>
+        </div>
+        <!-- LAYER BOTTOM -->
+        <div class="cake-tier tier-bottom">
+          <div class="cake-face tier-bottom-face">
+            <div class="cake-deco-bottom">
+              <span>✿</span><span>♡</span><span>✿</span><span>♡</span><span>✿</span>
+            </div>
+          </div>
+        </div>
+        <!-- PLATE -->
+        <div class="cake-plate"></div>
+      </div>
+
+      <!-- CANDLES -->
+      <div class="candles-row" id="candlesRow">
+        <div class="candle-wrap" data-index="0">
+          <div class="candle-body c1">
+            <div class="flame-wrap">
+              <div class="flame">
+                <div class="flame-inner"></div>
+                <div class="flame-core"></div>
+                <div class="smoke hidden"></div>
+              </div>
+            </div>
+          </div>
+          <div class="candle-drip"></div>
+        </div>
+        <div class="candle-wrap" data-index="1">
+          <div class="candle-body c2">
+            <div class="flame-wrap">
+              <div class="flame">
+                <div class="flame-inner"></div>
+                <div class="flame-core"></div>
+                <div class="smoke hidden"></div>
+              </div>
+            </div>
+          </div>
+          <div class="candle-drip"></div>
+        </div>
+        <div class="candle-wrap" data-index="2">
+          <div class="candle-body c3">
+            <div class="flame-wrap">
+              <div class="flame">
+                <div class="flame-inner"></div>
+                <div class="flame-core"></div>
+                <div class="smoke hidden"></div>
+              </div>
+            </div>
+          </div>
+          <div class="candle-drip"></div>
+        </div>
+        <div class="candle-wrap" data-index="3">
+          <div class="candle-body c4">
+            <div class="flame-wrap">
+              <div class="flame">
+                <div class="flame-inner"></div>
+                <div class="flame-core"></div>
+                <div class="smoke hidden"></div>
+              </div>
+            </div>
+          </div>
+          <div class="candle-drip"></div>
+        </div>
+        <div class="candle-wrap" data-index="4">
+          <div class="candle-body c5">
+            <div class="flame-wrap">
+              <div class="flame">
+                <div class="flame-inner"></div>
+                <div class="flame-core"></div>
+                <div class="smoke hidden"></div>
+              </div>
+            </div>
+          </div>
+          <div class="candle-drip"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CANDLE MESSAGE TOAST -->
+    <div class="candle-toast" id="candleToast"></div>
+  </div>
+</div>
+
+<!-- ======== SURPRISE SCREEN ======== -->
+<div class="screen hidden" id="screenSurprise">
+  <canvas id="fireworksCanvas"></canvas>
+  <div class="surprise-content">
+    <div class="surprise-emoji">🎂</div>
+    <h1 class="surprise-title">Semua Lilin<br>Telah Ditiup!</h1>
+    <p class="surprise-sub">Permohonanmu pasti terkabul ✨</p>
+    <button class="btn-letter" id="btnToTimeline">Baca Suratku →</button>
+  </div>
+  <div class="confetti-layer" id="confettiLayer"></div>
+</div>
+
+<!-- ======== TIMELINE SCREEN ======== -->
+<div class="screen hidden" id="screenTimeline">
+  <div class="tl-header">
+    <span class="tl-tag">perjalanan kita</span>
+    <h2>Cerita yang Kita Tulis Bersama</h2>
+  </div>
+  <div class="tl-scroll" id="tlScroll">
+    <div class="tl-track" id="tlTrack">
+
+      <div class="tl-card" data-year="2022">
+        <div class="tl-card-inner">
+          <div class="tl-img-side">
+            <img src="images/2022.jpeg" alt="2022">
+            <div class="tl-img-shine"></div>
+          </div>
+          <div class="tl-text-side">
+            <span class="tl-year-badge">2022</span>
+            <h3>Awal yang Diam-diam</h3>
+            <p>Tahun ketika segalanya dimulai dengan pelan — tanpa drama, hanya perasaan yang tumbuh sendiri tanpa aku sadari.</p>
+            <div class="tl-hearts">♡ ♡ ♡</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-card" data-year="2023">
+        <div class="tl-card-inner">
+          <div class="tl-img-side">
+            <img src="images/2023.jpeg" alt="2023">
+            <div class="tl-img-shine"></div>
+          </div>
+          <div class="tl-text-side">
+            <span class="tl-year-badge">2023</span>
+            <h3>Hari-hari yang Terasa Pulang</h3>
+            <p>Bersamamu, setiap hari biasa menjadi tempat paling nyaman. Kamu adalah rumah yang tidak pernah kusangka akan kutemukan.</p>
+            <div class="tl-hearts">♡ ♡ ♡ ♡</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-card" data-year="2024">
+        <div class="tl-card-inner">
+          <div class="tl-img-side">
+            <img src="images/2024.jpeg" alt="2024">
+            <div class="tl-img-shine"></div>
+          </div>
+          <div class="tl-text-side">
+            <span class="tl-year-badge">2024</span>
+            <h3>Tumbuh Bersama</h3>
+            <p>Kita belajar bersabar, belajar memahami satu sama lain. Dan di setiap prosesnya, aku semakin yakin bahwa kamu layak diperjuangkan.</p>
+            <div class="tl-hearts">♡ ♡ ♡ ♡ ♡</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-card" data-year="2025">
+        <div class="tl-card-inner">
+          <div class="tl-img-side">
+            <img src="images/2025Crp.jpeg" alt="2025">
+            <div class="tl-img-shine"></div>
+          </div>
+          <div class="tl-text-side">
+            <span class="tl-year-badge">2025</span>
+            <h3>Masih Memilihmu</h3>
+            <p>Setiap pagi adalah keputusan baru. Dan setiap pagi tanpa ragu, aku selalu memilih kamu lagi dan lagi.</p>
+            <div class="tl-hearts">♡ ♡ ♡ ♡ ♡ ♡</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-card tl-card-last" data-year="2026">
+        <div class="tl-card-inner">
+          <div class="tl-img-side">
+            <img src="images/2026.png" alt="2026">
+            <div class="tl-img-shine"></div>
+          </div>
+          <div class="tl-text-side">
+            <span class="tl-year-badge special">2026 ✦</span>
+            <h3>Dan Selamanya</h3>
+            <p>Semoga cerita ini tidak pernah berakhir. Semoga selalu ada halaman berikutnya — dan semoga setiap halaman selalu bersamamu.</p>
+            <div class="tl-hearts gold">♡ ♡ ♡ ♡ ♡ ♡ ♡</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- PROGRESS BAR -->
+    <div class="tl-progress-bar">
+      <div class="tl-progress-fill" id="tlProgressFill"></div>
+    </div>
+    <!-- DOTS -->
+    <div class="tl-dots" id="tlDots"></div>
+  </div>
+  <div class="tl-nav">
+    <button class="tl-btn" id="tlPrev">←</button>
+    <button class="tl-btn" id="tlNext">→ Lanjut ke Surat</button>
+  </div>
+</div>
+
+<!-- ======== LETTER SCREEN ======== -->
+<div class="screen hidden" id="screenLetter">
+  <div class="letter-bg"></div>
+  <div class="letter-container">
+    <div class="envelope" id="envelope">
+      <div class="envelope-back"></div>
+      <div class="envelope-paper" id="envelopePaper">
+        <div class="letter-content" id="letterContent">
+          <div class="lc-top">
+            <span class="lc-date">24 Mei 2026</span>
+            <div class="lc-deco">✦ ✦ ✦</div>
+          </div>
+          <h2 class="lc-greeting">Untuk Rizka,<br><em>Cintaku.</em></h2>
+          <div class="lc-body">
+            <p>Terima kasih sudah hadir di hari-hariku yang paling sunyi. Kamu yang membuat ribut itu terasa bermakna, dan diam itu terasa aman.</p>
+            <p>Setiap tahun bersamamu adalah bukti bahwa hal-hal baik memang ada di dunia ini — dan aku cukup beruntung untuk menemukannya dalam dirimu.</p>
+            <p>Hari ini adalah harimu. Tapi aku ingin berterima kasih atas setiap hari yang kamu berikan untukku, atas setiap senyum, setiap sabar, setiap momen yang kamu pilih untuk tetap ada.</p>
+            <p>Semoga tahun ini membawamu lebih banyak kebahagiaan dari yang pernah kamu bayangkan. Dan semoga aku bisa terus jadi bagian dari kebahagiaan itu — selamanya.</p>
+          </div>
+          <div class="lc-sign">
+            <span>dengan seluruh hatiku,</span>
+            <em class="lc-name">— selalu ada untukmu ♡</em>
+          </div>
+        </div>
+      </div>
+      <div class="envelope-front">
+        <div class="envelope-seal" id="envelopeSeal">
+          <span>♡</span>
+        </div>
+        <p class="envelope-hint">Klik untuk membuka</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== MUSIC CONTROLS ======== -->
+<div class="music-panel" id="musicPanel">
+  <button class="music-toggle" id="musicToggle">♪</button>
+  <div class="music-wave" id="musicWave">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+</div>
+
+<!-- ======== NAV DOTS ======== -->
+<div class="nav-dots" id="navDots">
+  <button class="nd active" data-screen="0" title="Intro"></button>
+  <button class="nd" data-screen="1" title="Hero"></button>
+  <button class="nd" data-screen="2" title="Lilin"></button>
+  <button class="nd" data-screen="3" title="Kejutan"></button>
+  <button class="nd" data-screen="4" title="Cerita"></button>
+  <button class="nd" data-screen="5" title="Surat"></button>
+</div>
+
+<!-- ======== POPUP IMAGE ======== -->
+<div class="img-popup" id="imgPopup">
+  <div class="img-popup-inner">
+    <img id="imgPopupSrc" alt="">
+    <button class="img-popup-close" id="imgPopupClose">✕</button>
+  </div>
+</div>
+
+<!-- ======== CANDLE MESSAGE OVERLAY ======== -->
+<div class="candle-msg-overlay" id="candleMsgOverlay">
+  <div class="candle-msg-box" id="candleMsgBox">
+    <div class="cmb-flame">🕯️</div>
+    <h3 id="cmbTitle"></h3>
+    <p id="cmbText"></p>
+    <button class="cmb-close" id="cmbClose">Tutup ♡</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
